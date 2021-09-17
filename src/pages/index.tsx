@@ -3,11 +3,18 @@ import Tmdb from '../service/Tmdb';
 import MovieRows from '../components/Row/MovieRows';
 import TopMovie from '../components/TopMovie/topMovie';
 import Header from '../components/Header/header';
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Modal, { ModalHandles } from '../components/Modal/Modal';
+
 
 export default function Home({ allMovies, topMovie }) {
   const [blackHeader, setBlackHeader] = useState(false);
+  const modalRef = useRef<ModalHandles>(null);
+
+  const openModal = useCallback(() => {
+    modalRef.current?.handleOpenModal();
+  },[]);
 
   useEffect(() => {
    async function scrollListener() {
@@ -39,7 +46,7 @@ export default function Home({ allMovies, topMovie }) {
         <footer>
           Feito com <FavoriteIcon/> por Leo
         </footer>
-
+        <Modal ref={modalRef}/>
         {!allMovies &&
         <div className="loading">
           <img src="https://media.filmelier.com/noticias/br/2020/03/Netflix_LoadTime.gif"></img>
