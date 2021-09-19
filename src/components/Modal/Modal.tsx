@@ -1,10 +1,10 @@
 
-import React, { useState, useCallback, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useCallback, forwardRef, ForwardRefRenderFunction, useImperativeHandle } from 'react';
 
 export interface ModalHandles {
     handleOpenModal: () => void;
 }
-const Modal: React.RefForwardingComponent<ModalHandles> = (props, ref) => {
+const Modal: React.ForwardRefRenderFunction<ModalHandles> = (props, ref) => {
     const [visible, setVisible] = useState(true);
 
     useImperativeHandle(ref, () => {
@@ -16,10 +16,13 @@ const Modal: React.RefForwardingComponent<ModalHandles> = (props, ref) => {
 
     const handleOpenModal = useCallback(() => {
         setVisible(true);
+        console.log('true');
     }, []);
 
     const handleCloseModal = useCallback(() => {
         setVisible(false);
+        console.log('false');
+
     }, []);
 
     if (!visible) {

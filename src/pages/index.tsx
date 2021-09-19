@@ -45,6 +45,7 @@ export default function Home({ allMovies, topMovie }) {
         </section>
         <footer>
           Feito com <FavoriteIcon/> por Leo
+          <button onClick={openModal}>Abrir Modal</button>
         </footer>
         <Modal ref={modalRef}/>
         {!allMovies &&
